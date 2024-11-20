@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playable Ludo</title>
+    <style>
+		*
+		{
+			margin:0;
+			padding: 0;
+		}
+		.outer
+		{
+			height: 750px;
+			width:750px;
+			margin:0px auto;
+			border:1px solid red;
+		}
+		.box_row
+		{
+		height: 300px;
+		width:750px;
+		//background: #fc8596;
+		}
+		.box
+		{
+			height: 200px;
+			width:200px;
+			float: left;
+			//background: #ccc;
+		}
+		.v_lad
+		{
+			height: 300px;
+			width:150px;
+			//background: #ed8541;
+			float: left;
+		}
+		.circle
+		{
+			height: 50px;
+			width:50px;
+			//background: #f07485;
+			margin:25px;
+			border-radius: 50%;
+			box-sizing: border-box;
+			float: left;
+		}
+		.border_red
+		{
+			border:5px solid red;
+		}
+		.border_green
+		{
+			border:5px solid green;
+		}
+		.border_blue
+		{
+			border:5px solid blue;
+		}
+		.border_yellow
+		{
+			border:5px solid yellow;
+		}
+		.v_lad_row
+		{
+			height: 50px;
+			width:150px;
+			//background: #dd7485;
+		}
+		.v_lad_cell
+		{
+			height: 50px;
+			width:50px;
+			border:1px solid #000;
+			box-sizing: border-box;
+			float: left;
+			text-align: center;
+		}
+		.red
+		{
+			background: red;
+		}
+		.green
+		{
+			background: green;
+		}
+		.blue
+		{
+			background: blue;
+		}
+		.yellow
+		{
+			background: yellow;
+		}
+		.middle_row
+		{
+			height: 150px;
+			width:750px;
+
+		}
+		.h_lad
+		{
+			height: 150px;
+			width:300px;
+			//background: #ff4152;
+			float: left;
+		}
+		.h_lad_row
+		{
+			height: 50px;
+			width: 300px;
+			//background: #ffc857;
+			float: left;
+		}
+		.h_lad_cell
+		{
+			height: 50px;
+			width:50px;
+			border:1px solid #000;
+			float: left;
+			box-sizing: border-box;
+			text-align: center;
+		}
+		.ludo_home
+		{
+			height: 0;
+			width: 0;
+			border-left:75px solid red;
+			border-right:75px solid yellow;
+			border-top:75px solid green;
+			border-bottom:75px solid blue;
+			float: left;	
+		}
+		.star
+		{
+			font-size: 32px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+    <h1>Playable Ludo</h1>
+    <div class="board" id="board">
+        <div class="outer">
+            <div class="box_row">
+                <div class="box" style="border:50px solid red;">
+                    <div class="circle border_red"></div>
+                    <div class="circle border_red"></div>
+                    <div class="circle border_red"></div>
+                    <div class="circle border_red"></div>
+                </div>
+                <div class="v_lad">
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell green"></div>
+                        <div class="v_lad_cell green"><span class="star">&#9733;</span></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell green"><span class="star">&#9733;</span></div>
+                        <div class="v_lad_cell green"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell green"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell green"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell green"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                </div>
+                <div class="box" style="border:50px solid green;">
+                    <div class="circle border_green"></div>
+                    <div class="circle border_green"></div>
+                    <div class="circle border_green"></div>
+                    <div class="circle border_green"></div>
+                </div>
+            </div>
+            <div class="middle_row">
+            <div class="h_lad">
+                <div class="h_lad_row">
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell red"><span class="star">&#9733;</span></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                </div>
+                <div class="h_lad_row">
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell red"></div>
+                    <div class="h_lad_cell red"></div>
+                    <div class="h_lad_cell red"></div>
+                    <div class="h_lad_cell red"></div>
+                    <div class="h_lad_cell red"></div>
+                </div>
+                <div class="h_lad_row">
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell red"><span class="star">&#9733;</span></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                </div>
+                </div>
+                <div class="ludo_home"></div>
+                <div class="h_lad">
+                    <div class="h_lad_row">
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell yellow"><span class="star">&#9733;</span></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                </div>
+                <div class="h_lad_row">
+                    <div class="h_lad_cell yellow"></div>
+                    <div class="h_lad_cell yellow"></div>
+                    <div class="h_lad_cell yellow"></div>
+                    <div class="h_lad_cell yellow"></div>
+                    <div class="h_lad_cell yellow"></div>
+                    <div class="h_lad_cell "></div>
+                </div>
+                <div class="h_lad_row">
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell"></div>
+                    <div class="h_lad_cell yellow"><span class="star">&#9733;</span></div>
+                    <div class="h_lad_cell"></div>
+                </div>
+                </div>
+                
+            </div>
+            <div class="box_row">
+                <div class="box" style="border:50px solid blue;">
+                    <div class="circle border_blue"></div>
+                    <div class="circle border_blue"></div>
+                    <div class="circle border_blue"></div>
+                    <div class="circle border_blue"></div>
+                </div>
+                <div class="v_lad">
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell blue"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell blue"></div>
+                        <div class="v_lad_cell "></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell blue"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell blue"></div>
+                        <div class="v_lad_cell blue"><span class="star">&#9733;</span></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell blue "><span class="star">&#9733;</span></div>
+                        <div class="v_lad_cell blue"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                    <div class="v_lad_row">
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell"></div>
+                        <div class="v_lad_cell"></div>
+                    </div>
+                </div>
+                <div class="box" style="border:50px solid yellow;">
+                    <div class="circle border_yellow"></div>
+                    <div class="circle border_yellow"></div>
+                    <div class="circle border_yellow"></div>
+                    <div class="circle border_yellow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="rollDice">Roll Dice</button>
+        <p class="status" id="diceResult">Dice: </p>
+        <p class="status" id="turn">Player Turn: Red</p>
+    </div>
+    <script>
+        // Board and Player Configuration
+        const board = document.getElementById('board');
+        const boardSize = 15;
+        const players = [
+            { color: 'red', path: [], position: -1, token: null },
+            { color: 'green', path: [], position: -1, token: null },
+            { color: 'blue', path: [], position: -1, token: null },
+            { color: 'yellow', path: [], position: -1, token: null },
+        ];
+        let currentPlayerIndex = 0;
+
+        // Generate the board dynamically
+        function generateBoard() {
+            for (let i = 0; i < boardSize * boardSize; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                board.appendChild(cell);
+            }
+
+            // Define paths for each player
+            const cells = document.querySelectorAll('.cell');
+            players[0].path = definePath(cells, 105, -15, 1); // Red
+            players[1].path = definePath(cells, 165, 15, -1); // Green
+            players[2].path = definePath(cells, 195, -15, -1); // Blue
+            players[3].path = definePath(cells, 255, 15, 1); // Yellow
+        }
+
+        // Define paths dynamically
+        function definePath(cells, start, increment, step) {
+            const path = [];
+            for (let i = 0; i < 56; i++) {
+                const pos = start + (i % 7) * step + Math.floor(i / 7) * increment;
+                path.push(cells[pos]);
+                cells[pos].classList.add(`path-${players[currentPlayerIndex].color}`);
+            }
+            return path;
+        }
+
+        // Roll Dice
+        document.getElementById('rollDice').addEventListener('click', () => {
+            const dice = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('diceResult').textContent = `Dice: ${dice}`;
+            const player = players[currentPlayerIndex];
+
+            // Move token
+            if (player.position === -1 && dice === 6) {
+                player.position = 0; // Enter board
+            } else if (player.position !== -1) {
+                player.position += dice;
+                if (player.position >= player.path.length) {
+                    alert(`${capitalize(player.color)} wins!`);
+                    resetGame();
+                    return;
+                }
+            }
+
+            // Update token position
+            updateToken(player);
+
+            // Next turn
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+            document.getElementById('turn').textContent = `Player Turn: ${capitalize(players[currentPlayerIndex].color)}`;
+        });
+
+        // Update token position visually
+        function updateToken(player) {
+            if (player.token) player.token.remove();
+            if (player.position !== -1) {
+                const cell = player.path[player.position];
+                const token = document.createElement('div');
+                token.classList.add('token', `token-${player.color}`);
+                cell.appendChild(token);
+                player.token = token;
+            }
+        }
+
+        // Reset the game
+        function resetGame() {
+            players.forEach(player => {
+                player.position = -1;
+                if (player.token) player.token.remove();
+            });
+            currentPlayerIndex = 0;
+            document.getElementById('diceResult').textContent = 'Dice: ';
+            document.getElementById('turn').textContent = 'Player Turn: Red';
+        }
+
+        // Capitalize player color for display
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Initialize the game
+        generateBoard();
+    </script>
+</body>
+</html>

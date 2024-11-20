@@ -145,26 +145,57 @@
           <div class="shape"></div>
           <div class="shape"></div>
         </div>
-        <form>
+        <form id="loginForm">
           <h3>Login Here</h3>
-
+        
           <label for="username">Email</label>
-          <input type="text" placeholder="Email or Phone" id="username" />
-
+          <input type="text" placeholder="Email or Phone" id="email" />
+        
           <label for="password">Password</label>
           <input type="password" placeholder="Password" id="password" />
-
-          <button>Log In</button>
-
+        
+          <button type="submit">Log In</button>
+        
           <div class="social">
             <div class="go"><i class="fab fa-google"></i> Google</div>
             <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
           </div>
-
-          <a href="/signup"><p>If you dont have account: Sign up</p></a>
+        
+          <a href="/signup"><p>If you don't have an account: Sign up</p></a>
         </form>
       </body>
     </html>
     <!-- partial -->
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the form from submitting in the default way
+    
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+    
+        try {
+          const response = await fetch('/api/user/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+          });
+    
+          const data = await response.json();
+          if (data.status) {
+            // Store user data (e.g., in localStorage or sessionStorage)
+            localStorage.setItem('user', JSON.stringify(data.data));
+            
+            // Redirect to a new page after successful login
+            window.location.href = '/home'; // Update with your desired route
+          } else {
+            alert(data.message); // Show error message
+          }
+        } catch (error) {
+          console.error('Error logging in:', error);
+        }
+      });
+    </script>
   </body>
 </html>

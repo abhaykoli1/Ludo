@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ludo Game | Homepage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #080710;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+            circle,
+            rgba(34, 193, 195, 0.1),
+            rgba(45, 253, 89, 0.1),
+            rgba(253, 45, 89, 0.1)
+          ),
+          linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      }
+
+      .container {
+        width: 350px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        text-align: center;
+        color: #fff;
+      }
+
+      .container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .tab-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+      }
+
+      .tab {
+        width: 140px;
+        height: 140px;
+        background: linear-gradient(to right, #ff512f, #dd2476);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .tab:hover {
+        transform: scale(1.05);
+        background: linear-gradient(to right, #56ab2f, #a8e063);
+      }
+
+      .tab-2player {
+        background: linear-gradient(to right, #1e3c72, #2a5298);
+      }
+
+      .tab-4player {
+        background: linear-gradient(to right, #ff512f, #f09819);
+      }
+
+      .tab p {
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+      }
+
+      .footer a {
+        color: #f09819;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ludo Game</h1>
+
+      <div class="tab-container">
+        <!-- Tab for 2 Players -->
+        <div class="tab tab-2player" onclick="alert('2 Player Mode Selected')">
+          <p>2 Players</p>
+        </div>
+
+        <!-- Tab for 4 Players -->
+        <div class="tab tab-4player" onclick="alert('4 Player Mode Selected')">
+          <p>4 Players</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>&copy; 2024 Ludo Game. <a href="#">Privacy Policy</a></p>
+      </div>
+    </div>
+  </body>
+</html>
