@@ -5,18 +5,43 @@ from login.routes import login_routes
 from ludoboard.routes import game_routes
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.requests import Request
+from fastapi import Request
 from fastapi.templating import Jinja2Templates
+from authlib.integrations.starlette_client import OAuth
+from starlette.config import Config
+from starlette.middleware.sessions import SessionMiddleware
+import os
+from dotenv import load_dotenv
+from starlette.staticfiles import StaticFiles
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+
+
+# If SECRET_KEY is not found, raise an error
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY not found in .env file")
+else:
+    print("found" + SECRET_KEY)
+    
 connect('LudoTest', host="mongodb+srv://avbigbuddy:nZ4ATPTwJjzYnm20@cluster0.wplpkxz.mongodb.net/LudoTest")
 app = FastAPI()
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Or specify your frontend URL
-    allow_methods=["*"],
-    allow_headers=["*"],
+    SessionMiddleware,
+    secret_key=SECRET_KEY,
+    max_age=3600,
+    session_cookie="your_session_cookie",
 )
-from starlette.staticfiles import StaticFiles
-app = FastAPI()
+config = Config(".env")  # Create a .env file with CLIENT_ID and CLIENT_SECRET
+oauth = OAuth(config)
+oauth.register(
+    name="google",
+    client_id=config("GOOGLE_CLIENT_ID"),
+    client_secret=config("GOOGLE_CLIENT_SECRET"),
+    server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
+    client_kwargs={"scope": "openid email profile"},
+)
+
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(login_routes.router, tags=["Home"])
@@ -42,4 +67,5 @@ async def landingPage(request: Request):
     return templates.TemplateResponse('ludo_4player.html', {"request": request})
 @app.get("/home")
 async def landingPage(request: Request):
-    return templates.TemplateResponse('home.html', {"request": request})
+    user= request.session.get("user")
+    return templates.TemplateResponse('home.html', {"request": request, **user})
