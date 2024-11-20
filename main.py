@@ -53,7 +53,6 @@ app.include_router(game_routes.router, tags=["Game"])
 async def landingPage(request: Request):
     return templates.TemplateResponse('index.html', {"request": request})
 
-
 @app.get("/login")
 async def loginRoute(request: Request):
     return templates.TemplateResponse('login.html', {"request": request})
