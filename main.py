@@ -53,6 +53,7 @@ app.include_router(game_routes.router, tags=["Game"])
 async def landingPage(request: Request):
     return templates.TemplateResponse('index.html', {"request": request})
 
+
 @app.get("/login")
 async def loginRoute(request: Request):
     return templates.TemplateResponse('login.html', {"request": request})
@@ -64,7 +65,15 @@ async def loginRoute(request: Request):
 @app.get("/game")
 async def landingPage(request: Request):
     return templates.TemplateResponse('ludo_4player.html', {"request": request})
+
 @app.get("/home")
 async def landingPage(request: Request):
     user= request.session.get("user")
-    return templates.TemplateResponse('home.html', {"request": request, **user})
+    wallet = request.session.get("wallet")
+    
+    data = {
+        "user": user,
+        "wallet": wallet
+    }
+    print(data)
+    return templates.TemplateResponse('home.html', {"request": request, **data})

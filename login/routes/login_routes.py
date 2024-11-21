@@ -10,7 +10,8 @@ import json
 from login.model.login_model import LoginBody, LoginTable
 from starlette.middleware.sessions import SessionMiddleware
 from dotenv import load_dotenv
-
+from wallet.wallet_model import WalletModel, WalletTable
+from bson import ObjectId
 load_dotenv()
 
 router = APIRouter()
@@ -43,6 +44,10 @@ async def create_user(body: LoginBody):
     else:
         saveData = LoginTable(**body.dict())
         saveData.save()
+        wallet = WalletTable(userid=str(ObjectId(saveData.id)), balance=49, totalWithdrawal=0)
+        wallet.save()
+        walletJson = wallet.to_json()
+        walletFromjson = json.loads(walletJson)
         tojson = saveData.to_json()
         fromjson = json.loads(tojson)
         return {
@@ -52,25 +57,7 @@ async def create_user(body: LoginBody):
         }
 
 
-@router.post("/api/user/create")
-async def create_user(body: LoginBody):
-    findata = LoginTable.objects(email=body.email).first()
-    if findata:
-        return {
-            "message": "user already exist",
-            "data": None,
-            "status": False
-        }
-    else:
-        saveData = LoginTable(**body.dict())
-        saveData.save()
-        tojson = saveData.to_json()
-        fromjson = json.loads(tojson)
-        return {
-            "message": "User Created Succes",
-            "data": fromjson,
-            "status": True
-        }
+
 
 @router.get("/api/user/get-users")
 async def get_User():
@@ -92,6 +79,12 @@ async def login_user(request: Request, body: LoginBodyLogin):
             fromjson = json.loads(tojson)
             request.session["user"] = {
                 "data":fromjson,
+            }
+            wallet = WalletTable.objects(userid=str(ObjectId(findUser.id))).first()
+            walletTojson = wallet.to_json()
+            walletFromJson = json.loads(walletTojson)
+            request.session["wallet"] = {
+            "balance":walletFromJson,
             }
             return {
                 "message": "User Login Suces",
@@ -129,17 +122,25 @@ async def auth(request: Request):
         # You can store user info in your database here
         tojson = finduser.to_json()
         fromjson = json.loads(tojson)
-        request.session["user"] = {
+        request.session["user"] = {     
             "data":fromjson,
         }
         return RedirectResponse(url="/home")
     else:
-        saveUserData = LoginTable(email=user['email'], name=user['name'], password=user['iat'])
+        saveUserData = LoginTable(email=user['email'], name=user['name'], password=user['nonce'])
         saveUserData.save()
+        print(ObjectId(saveUserData.id))
+        wallet = WalletTable(userid=str(ObjectId(saveUserData.id)), balance=49, totalWithdrawal=0)
+        wallet.save()
+        walletJson = wallet.to_json()
+        walletFromjson = json.loads(walletJson)
         tojson = saveUserData.to_json()
         fromjson = json.loads(tojson)
         request.session["user"] = {
             "data":fromjson,
+        }
+        request.session["wallet"] = {
+            "balance":walletFromjson,
         }
         return RedirectResponse(url="/home")
 

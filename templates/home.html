@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ludo Game | Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       * {
         margin: 0;
@@ -17,22 +20,36 @@
 
       body {
         font-family: "Poppins", sans-serif;
+        padding-top: 120px;
         background-color: #080710;
         height: 100vh;
         display: flex;
+       
+        /* flex-direction: column;
         align-items: center;
-        justify-content: center;
-        background: radial-gradient(
+        justify-content: center; */
+        /* background: radial-gradient(
             circle,
             rgba(34, 193, 195, 0.1),
             rgba(45, 253, 89, 0.1),
             rgba(253, 45, 89, 0.1)
           ),
-          linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+          linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); */
       }
 
-      .container {
+     .head{
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(59, 59, 59, 0.37);
+        text-align: center;
+        color: #fff;
+      }
+
+      .HomeCon  {
         width: 350px;
+        display: flex ;
+       flex-direction: column;
         padding: 30px;
         background: rgba(255, 255, 255, 0.15);
         backdrop-filter: blur(10px);
@@ -98,27 +115,63 @@
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <h1>Ludo Game</h1>
-      <h2>Welcome {{data.name}} </h2>
+  <body  >
+<div class="container mx-auto ">
 
-      <div class="tab-container">
-        <!-- Tab for 2 Players -->
-        <div class="tab tab-2player" onclick="alert('2 Player Mode Selected')">
-          <p>2 Players</p>
-          
-        </div>
 
-        <!-- Tab for 4 Players -->
-        <div class="tab tab-4player" onclick="alert('4 Player Mode Selected')">
-          <p>4 Players</p>
+    <header class="absolute  top-0 left-0 right-0 backdrop-blur-lg text-white p-3">
+      <div class="container px-5  w-full head mx-auto flex h-20 justify-between items-center">
+        <!-- Logo on the left -->
+        <div class="text-2xl font-bold">
+          <a href="/" class="text-white hover:text-gray-300">Logo</a>
         </div>
+  
+        <!-- Navigation links on the right -->
+        <nav class="space-x-6">
+          <a href="/passbook" class="hover:text-gray-300">Passbook</a>
+          <a href="/wallet" class="hover:text-gray-300">Wallet</a>
+          <a href="/profile" class="hover:text-gray-300">Profile</a>
+          <a href="/logout" class="hover:text-gray-300">Logout</a>
+        </nav>
       </div>
+    </header>
 
-      <div class="footer">
-        <p>&copy; 2024 Ludo Game. <a href="#">Privacy Policy</a></p>
+
+    <div class="flex justify-between items-center  mb-5">
+      <div class="head max-w-[250px] flex px-6 justify-between py-6  gap-10 items-cente">
+        <i class="fas fa-wallet text-6xl text-blue-500"></i>
+       <div> <p>{{wallet.balance.balance}}</p>
+        <p class="text-blue-500 underline">Balance</p></div>
+      </div>
+      <div class="head max-w-[280px] flex px-6 justify-between py-6  gap-10 items-cente">
+        <i class="fas fa-money-bill-wave text-6xl text-green-500"></i>
+       <div> <p>{{wallet.balance.totalWithdrawal}}</p>
+        <p class="text-blue-500 underline">withdrawl</p></div>
       </div>
     </div>
+
+    <div class="flex items-center justify-center">
+      <div class="HomeCon">
+        <h1>Ludo Game</h1>
+        <h2>Welcome {{user.data.name}} </h2>
+  
+        <div class=" tab-container">
+          <!-- Tab for 2 Players -->
+          <div class="tab tab-2player" onclick="alert('2 Player Mode Selected')">
+            <p>2 Players</p>
+          </div>
+  
+          <!-- Tab for 4 Players -->
+          <div class="tab tab-4player" onclick="alert('4 Player Mode Selected')">
+            <p>4 Players</p>
+          </div>
+        </div>
+  
+        <div class="footer">
+          <p>&copy; 2024 Ludo Game. <a href="#">Privacy Policy</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
   </body>
 </html>

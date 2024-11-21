@@ -23,15 +23,14 @@
         />
         <!--Stylesheet-->
         <style media="screen">
-          *,
-          *:before,
-          *:after {
+          * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
           }
           body {
             background-color: #080710;
+            font-family: "Poppins", sans-serif;
           }
           .background {
             width: 430px;
@@ -70,9 +69,12 @@
             border: 2px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
             padding: 50px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
           }
           form * {
-            font-family: "Poppins", sans-serif;
             color: #ffffff;
             letter-spacing: 0.5px;
             outline: none;
@@ -84,7 +86,6 @@
             line-height: 42px;
             text-align: center;
           }
-
           label {
             display: block;
             margin-top: 30px;
@@ -118,16 +119,20 @@
           }
           .social {
             margin-top: 30px;
-            display: flex;
+            width: 100%;
+          }
+          .social a {
+            text-decoration: none;
           }
           .social div {
-            background: red;
-            width: 150px;
+            
+            width:100%;
             border-radius: 3px;
             padding: 5px 10px 10px 5px;
             background-color: rgba(255, 255, 255, 0.27);
             color: #eaf0fb;
             text-align: center;
+          
           }
           .social div:hover {
             background-color: rgba(255, 255, 255, 0.47);
@@ -137,6 +142,79 @@
           }
           .social i {
             margin-right: 4px;
+          }
+          .GoTo{
+            margin-top: 15px;
+            display: flex;
+            gap: 5px;
+          }
+    
+          /* Responsive Design */
+          @media screen and (max-width: 768px) {
+            .background {
+              width: 300px;
+              height: 400px;
+            }
+            .background .shape:first-child {
+              left: -50px;
+              top: -50px;
+            }
+            .background .shape:last-child {
+              right: -20px;
+              bottom: -50px;
+            }
+            form {
+              width: 90%;
+              height: auto;
+              padding: 40px 25px;
+            }
+            form h3 {
+              font-size: 28px;
+            }
+            input {
+              height: 45px;
+            }
+            button {
+              font-size: 16px;
+            }
+            .social div {
+           
+              font-size: 14px;
+            }
+
+          }
+    
+          @media screen and (max-width: 480px) {
+            .background {
+              width: 250px;
+              height: 350px;
+            }
+            .background .shape:first-child {
+              left: -40px;
+              top: -40px;
+            }
+            .background .shape:last-child {
+              right: -10px;
+              bottom: -40px;
+            }
+            form {
+              width: 90%;
+              height: auto;
+              padding: 30px 15px;
+            }
+            form h3 {
+              font-size: 24px;
+            }
+            input {
+              height: 40px;
+            }
+            button {
+              font-size: 14px;
+            }
+            .social div {
+           
+              font-size: 12px;
+            }
           }
         </style>
       </head>
@@ -157,11 +235,11 @@
           <button type="submit">Log In</button>
         
           <div class="social">
-            <a href="/auth/google"> <div class="go"><i class="fab fa-google"></i> Google</div></a>
-            <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+            <a href="/auth/google"> <div class="go"><i class="GoogleButton "></i> Google</div></a>
+            
           </div>
         
-          <a href="/signup"><p>If you don't have an account: Sign up</p></a>
+          <div class="GoTo"><span>If you don't have an account:</span><a href="/signup"> Sign up</a></div>
         </form>
       </body>
     </html>
