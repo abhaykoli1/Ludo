@@ -85,7 +85,18 @@ async def landingPage(request: Request):
     }
     print(data)
     return templates.TemplateResponse('home.html', {"request": request, **data})
-
+@app.post("/home")
+async def landingPage(request: Request):
+    user= request.session.get("user")
+    wallet = WalletTable.objects.get(userid=str(user["data"]["_id"]["\u0024oid"]))
+    wallettojson = wallet.to_json()
+    walletFromjson = json.loads(wallettojson)
+    data = {
+        "user": user,
+        "wallet": walletFromjson
+    }
+    print(data)
+    return templates.TemplateResponse('home.html', {"request": request, **data})
 @app.get("/passbook")
 async def homepost(request: Request):
     user= request.session.get("user")
