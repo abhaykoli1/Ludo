@@ -143,5 +143,4 @@ async def auth(request: Request):
             "balance":walletFromjson,
         }
         return RedirectResponse(url="/home")
-
     return {"error": "Unable to authenticate user"}

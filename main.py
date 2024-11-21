@@ -75,7 +75,7 @@ async def landingPage(request: Request):
 @app.get("/home")
 async def landingPage(request: Request):
     user= request.session.get("user")
-    wallet = WalletTable.objects.get(id=ObjectId(user["data"]["_id"]))
+    wallet = WalletTable.objects.get(userid=str(user["data"]["_id"]["\u0024oid"]))
     wallettojson = wallet.to_json()
     walletFromjson = json.loads(wallettojson)
     data = {
