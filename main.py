@@ -1,7 +1,6 @@
 from fastapi import APIRouter, FastAPI
 from mongoengine import connect
 from login.routes import login_routes
-
 from ludoboard.routes import game_routes
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,6 +12,11 @@ from starlette.middleware.sessions import SessionMiddleware
 import os
 from dotenv import load_dotenv
 from starlette.staticfiles import StaticFiles
+from passbook.routes import passbook_routes
+from wallet.wallet_model import WalletTable
+from bson import ObjectId
+import json
+
 load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -46,7 +50,7 @@ templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(login_routes.router, tags=["Home"])
 app.include_router(game_routes.router, tags=["Game"])
-
+app.include_router(passbook_routes.router, tags=["payments"])
 
 # page Routes
 @app.get("/")
@@ -65,15 +69,18 @@ async def loginRoute(request: Request):
 @app.get("/game")
 async def landingPage(request: Request):
     return templates.TemplateResponse('ludo_4player.html', {"request": request})
-
+@app.get("/deposit")
+async def landingPage(request: Request):
+    return templates.TemplateResponse('deposit.html', {"request": request})
 @app.get("/home")
 async def landingPage(request: Request):
     user= request.session.get("user")
-    wallet = request.session.get("wallet")
-    
+    wallet = WalletTable.objects.get(id=ObjectId(user["data"]["_id"]))
+    wallettojson = wallet.to_json()
+    walletFromjson = json.loads(wallettojson)
     data = {
         "user": user,
-        "wallet": wallet
+        "wallet": walletFromjson
     }
     print(data)
     return templates.TemplateResponse('home.html', {"request": request, **data})
