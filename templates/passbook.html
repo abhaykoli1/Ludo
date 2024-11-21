@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Table Design</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            text-align: left;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        th, td {
+            padding: 12px 15px;
+        }
+
+        thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        caption {
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption>Paassbook</caption>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Cr / Dr</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{item.cre_date}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.amount}}</td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+</body>
+</html>

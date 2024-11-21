@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 from starlette.staticfiles import StaticFiles
 from passbook.routes import passbook_routes
 from wallet.wallet_model import WalletTable
+from passbook.models.passbook_model import PassbookTable
 from bson import ObjectId
 import json
 
@@ -85,15 +86,15 @@ async def landingPage(request: Request):
     print(data)
     return templates.TemplateResponse('home.html', {"request": request, **data})
 
-@app.post("/home")
+@app.get("/passbook")
 async def homepost(request: Request):
     user= request.session.get("user")
-    wallet = WalletTable.objects.get(userid=str(user["data"]["_id"]["\u0024oid"]))
+    wallet = PassbookTable.objects(userid=str(user["data"]["_id"]["\u0024oid"])).all()
     wallettojson = wallet.to_json()
     walletFromjson = json.loads(wallettojson)
     data = {
-        "user": user,
+        
         "wallet": walletFromjson
     }
     print(data)
-    return templates.TemplateResponse('home.html', {"request": request, **data})
+    return templates.TemplateResponse('passbook.html', {"request": request, "items": walletFromjson})
